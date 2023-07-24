@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use OpenAI;
+use Inertia\Inertia;
 
 class AiController extends Controller
 {
     public function index()
     {
+        return Inertia::render('Index');
+    }
+    public function makeRequest(){
         $yourApiKey = env('OPENAI_API_KEY');
         $client = OpenAI::client($yourApiKey);
 
@@ -17,6 +21,6 @@ class AiController extends Controller
             'prompt' => 'PHP is',
         ]);
 
-        echo $result['choices'][0]['text']; // Output the generated text
+        echo $result['choices'][0]['text'];
     }
 }
